@@ -36,11 +36,26 @@ For the purpose of this document, let's place it in the user directory: `%USERPR
 ## Step 3. Convert the certificate
 
 1. In `cmd` (or equivalent), navigate to the folder created in Step 1.
-2. Run `pkcs7 -print_certs -in exported.p7b -out converted.cer`.  Here it is assumed the 
+2. Run `openssl pkcs7 -print_certs -in exported.p7b -out converted.cer`.  Here it is assumed the 
 certificate exported in Step 2 is named `exported.p7b`.  Update the script to match your
 actual filenames.
 
+### Conversion Issues
+Your milage may vary with the above.  
+
+From this [comment](https://github.com/the-last-byte/ESET-NPM-Breakage-Fix/issues/1#issue-2255084754) by @nagyszabi:
+
+The following error or similar has been reported using the above:
+`unable to load PKCS7 object
+34359836736:error:0909006C:PEM routines:get_name:no start line:crypto/pem/pem_lib.c:745:Expecting: PKCS7`
+
+There have been [reports](https://github.com/the-last-byte/ESET-NPM-Breakage-Fix/issues/1#issuecomment-2068075201) that the following have 
+been succesful: `openssl pkcs7 -inform DER -in exported.p7b -outform PEM -out converted.cer`
+
 ## Step 4. Store converted certificate in environmental variable
+
+Note that the `\m` in the below command saves the variable in a system, rather than user 
+context.  See [setx documentation](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/setx).
 
 1. In `cmd` (or equivalent), navigate to the folder created in Step 1.
 2. Run `setx NODE_EXTRA_CA_CERTS %USERPROFILE%\certs\converted.cer /m` where `converted.cer` 
