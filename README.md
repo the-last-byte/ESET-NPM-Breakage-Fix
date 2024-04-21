@@ -6,12 +6,14 @@ For information (and the reason for this repo) check:
 https://forum.eset.com/topic/40702-eset-ssl-protection-produces-an-invalid-certificate-chain-for-nodejs-apps/
 
 ## The Problem
-ESET started replacing some certificates with their own, certificates which are not known to 
-node.  There is no option to set an additional certificate in node, nor is there one to use a
-system/specified trust store.
+ESET started replacing some certificates with their own certificates which are unknown to 
+node.  There is presently no real answer from support, no option to set an additional 
+certificate in node, nor is there one to use a system/specified trust store.
 
 The easy solution is to turn off the certificate check.  _Let's not call that one an option if 
 we can._
+
+We could also disable the ESET feature (but let's avoid that one too).
 
 The solution here is to export the certificate from the Windows certificate store and set it as
 an additional certificate for NPM.
