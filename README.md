@@ -39,7 +39,7 @@ For the purpose of this document, let's place it in the user directory: `%USERPR
 2. Run `openssl pkcs7 -print_certs -inform DER -in exported.p7b -outform PEM -out converted.cer` (thanks @nagyszabi, @ferdiusa, and @rstefko).  Here it is assumed the 
 certificate exported in Step 2 is named `exported.p7b`.  Update the script to match your
 actual filenames.
-   `openssl pkcs7 -print_certs -inform DER -in exported.p7b -outform PEM -out converted.cer`
+
 ### Conversion Issues
 Your milage may vary with the above but the general concensus seems that the current state here seems to work.
 
